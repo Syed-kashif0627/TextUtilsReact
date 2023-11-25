@@ -6,14 +6,17 @@ export default function TextForm(props) {
         //console.log('upper case was clicked');
         let newText=text.toUpperCase();
         setText(newText)
+        props.showAlert('Converted to Upper case!!','success')
     }
     const handleLoClick=()=>{       
         let newText=text.toLowerCase();
         setText(newText)
+        props.showAlert('Converted to Lower case!!','success')
     }
     const Clear=()=>{       
         let newText='';
         setText(newText)
+        props.showAlert('Text cleared!!','success')
     }
     const Speak= ()=>{
         let msg= new SpeechSynthesisUtterance();
@@ -23,6 +26,7 @@ export default function TextForm(props) {
 
     const copyText= ()=>{
         navigator.clipboard.writeText(text)
+        props.showAlert('Text copied to clip board!!','success')
     }
     const handleOnChange=(event)=>{
         // console.log('On Change');
@@ -31,6 +35,7 @@ export default function TextForm(props) {
     const handleSpaces= ()=>{
         let newtext=text.split(/[  ]+/);// Regular Expression to check one or more spaces
         setText(newtext.join(" "))
+        props.showAlert('Extra spaces removed!!','success')
     }
   const [text,setText]=useState("")
 //   text='new text'//wrong way to update the text
