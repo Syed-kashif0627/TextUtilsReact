@@ -56,8 +56,9 @@ export default function TextForm(props) {
     </div>
     <div className="container my-3" style={{color: props.mode ==='light'?'#042743':'white'}}>
         <h1>Your Text Summary</h1>
-        <p>{text.split(" ").length} Words and {text.length} Characters </p>
-        <p>{0.008 * text.split(" ").length} Minutes read</p>
+        {/* here in RE g stands for global that means it will check for whole string else if it is not used it only checks for first match */}
+        <p>{text.trim()===""?0:text.match(/\S+/g).length} Words and {text.replace(/\s+/g,"").length} Characters </p>
+        <p>{0.008 * (text.trim()===""?0:text.match(/\S+/g).length)} Minutes read</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter text to preview it here"}</p>
     </div>
