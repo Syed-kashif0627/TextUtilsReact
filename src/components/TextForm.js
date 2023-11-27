@@ -3,7 +3,6 @@ import React ,{useState} from 'react'
 
 export default function TextForm(props) {
     const handleUpClick=()=>{
-        //console.log('upper case was clicked');
         let newText=text.toUpperCase();
         setText(newText)
         props.showAlert('Converted to Upper case!!','success')
@@ -29,7 +28,6 @@ export default function TextForm(props) {
         props.showAlert('Text copied to clip board!!','success')
     }
     const handleOnChange=(event)=>{
-        // console.log('On Change');
         setText(event.target.value)
     }
     const handleSpaces= ()=>{
@@ -44,20 +42,20 @@ export default function TextForm(props) {
     <>
     <div className='container' style={{color: props.mode ==='dark'?'white':'#042743'}}>
         <div className="mb-3">
-        <h1>{props.heading}</h1>
-        <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor:props.mode ==='light'?'white':'black',color:props.mode ==='light'?'#042743':'white'}}id="myBox" rows="8"></textarea>
+        <h1 className='mb-4'>{props.heading}</h1>
+        <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor:props.mode ==='light'?'white':'#2d353d',color:props.mode ==='light'?'#042743':'white'}}id="myBox" rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to upper case</button> 
-        <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to lower case</button> 
-        <button className="btn btn-primary mx-1" onClick={Clear}>Clear Text</button> 
-        <button className="btn btn-primary mx-1" onClick={copyText}>Copy Text</button> 
-        <button className="btn btn-primary mx-1" onClick={handleSpaces}>Remove Spaces</button> 
-        <button className="btn btn-primary mx-1" onClick={Speak}>Text to Speak</button> 
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to upper case</button> 
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Convert to lower case</button> 
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={Clear}>Clear Text</button> 
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={copyText}>Copy Text</button> 
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleSpaces}>Remove Spaces</button> 
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={Speak}>Text to Speak</button> 
     </div>
     <div className="container my-3" style={{color: props.mode ==='light'?'#042743':'white'}}>
         <h1>Your Text Summary</h1>
         {/* here in RE g stands for global that means it will check for whole string else if it is not used it only checks for first match */}
-        <p>{text.trim()===""?0:text.match(/\S+/g).length} Words and {text.replace(/\s+/g,"").length} Characters </p>
+        <p>{text.split(/\s+/).filter((ele)=>{return ele.length!==0}).length} Words and {text.replace(/\s+/g,"").length} Characters </p>
         <p>{0.008 * (text.trim()===""?0:text.match(/\S+/g).length)} Minutes read</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter text to preview it here"}</p>
